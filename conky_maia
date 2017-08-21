@@ -33,6 +33,7 @@ ${goto 40}$color2${top name 5}$alignr$color${top cpu 5}%
 ${voffset 20}${goto 40}${color}Temperatures
 ${goto 40}${color2}CPU: $alignr$color${exec sensors it8622-isa-0290 -A | grep 'temp1:' | cut -c16-21}C
 ${goto 40}${color2}GPU: $alignr$color${exec nvidia-settings -query GPUCoreTemp | perl -ne 'print $1 if /GPUCoreTemp.*?: (\d+)./;' | cut -c-2}°C
+${goto 40}${color2}FAN: $alignr$color${exec sensors it8622-isa-0290 -A | grep 'fan1:' | cut -c15-21}
 
 #
 ${voffset 10}${goto 40}${color}RAM${font Bitstream Vera Sans:bold:size=8}$alignr$mem$font
