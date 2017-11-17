@@ -1,0 +1,22 @@
+#!/bin/bash
+# /usr/bin/blurlock
+
+# take screenshot
+scrot 'screenshot.png' -e 'mv $f /tmp/'
+
+# blur it
+#gm mogrify -scale 5% -scale 2000% /tmp/screenshot.png # Pixelate
+gm mogrify -blur 0x5 /tmp/screenshot.png # Blur
+
+
+# add overlay
+gm mogrify -gravity center -draw "image Over 1800,945 0,0 '/home/bnguyen/.i3/White_lock.png'" /tmp/screenshot.png
+
+# lock the screen
+i3lock -i /tmp/screenshot.png
+
+# remove temp files
+rm /tmp/screenshot.png
+
+# end script
+exit 0
