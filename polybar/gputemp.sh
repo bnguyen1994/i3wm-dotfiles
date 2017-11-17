@@ -1,0 +1,3 @@
+#!/bin/bash                                                                                                                                                                                                                          
+                                                                                                                                                                            
+echo "GPU "`nvidia-settings -query GPUCoreTemp | perl -ne 'print $1 if /GPUCoreTemp.*?: (\d+)./;' | cut -c-2`"°C" 
