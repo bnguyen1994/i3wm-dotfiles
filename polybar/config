@@ -29,6 +29,7 @@ menu-1-1 = sub-item 2.2;command
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
+monitor = ${env:MONITOR:}
 width = 100%
 height = 27
 ;offset-x = -80%
@@ -56,13 +57,13 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=true;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
-modules-center = xwindow
-modules-right = filesystem xbacklight volume cpu memory cputemp gputemp wlan eth battery temperature date powermenu
+;modules-center = xwindow
+modules-right = filesystem filesystem1 filesystem2 filesystem3 xbacklight cpu memory gpuutilization gpuram cputemp gputemp wlan eth battery temperature date powermenu
 
-tray-position = right
-tray-padding = 0
+tray-position = center
+tray-padding = 5
 ;tray-transparent = true
-;tray-background = #0063ff
+tray-background = #AB333333
 
 ;wm-restack = bspwm
 wm-restack = i3
@@ -101,7 +102,17 @@ interval = 25
 
 mount-0 = /
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted = %{F#}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/filesystem1]
+type = internal/fs
+interval = 25
+
+mount-0 = /mnt/storage
+
+label-mounted = %{F#}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -245,9 +256,9 @@ format-disconnected =
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
-date = %a %_d %b 12,0%y 
+date = %a %d %b 12,0%y 
 date-alt = " %Y-%m-%d"
 
 time = %l:%M:%S %p
@@ -314,16 +325,35 @@ animation-charging-2 = 
 animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
 
+[module/cpuspeed]
+type = custom/script
+exec = ~/.config/polybar/cpuspeed.sh
+interval = 1
+format-underline = #455963
+
 [module/cputemp]
 type = custom/script
 exec = ~/.config/polybar/cputemp.sh
-interval = 5
+interval = 1
 format-underline = #455963
 
 [module/gputemp]
 type = custom/script
 exec = ~/.config/polybar/gputemp.sh
-interval = 5
+interval = 1
+format-underline = #455963
+
+[module/gpuutilization]
+type = custom/script
+exec = ~/.config/polybar/gpuutilization.sh
+interval = 1
+format-underline = #455963
+
+
+[module/gpuram]
+type = custom/script
+exec = ~/.config/polybar/gpuram.sh
+interval = 1
 format-underline = #455963
 
 [module/temperature]
@@ -378,7 +408,6 @@ screenchange-reload = true
 ;compositing-background = screen
 ;compositing-foreground = source
 ;compositing-border = over
-
 [global/wm]
 margin-top = 5
 margin-bottom = 5
