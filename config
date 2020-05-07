@@ -35,7 +35,7 @@ bindsym $mod+Shift+q kill
 
 # start program launcher
 #bindsym $mod+d exec --no-startup-id dmenu_recency
-bindsym $mod+d exec rofi -show run -font "Noto Sans 18" -theme ~/.config/rofi/android_notification.rasi
+bindsym $mod+d exec rofi -show run -display-run "run:" -font "Noto Sans 18" -theme ~/.config/rofi/android_notification.rasi
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -46,7 +46,7 @@ bindsym $mod+z exec --no-startup-id morc_menu
 
 ##exec --no-startup-id volumeicon
 ##bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-exec --no-startup-id pulseaudio
+#exec --no-startup-id pulseaudio
 exec --no-startup-id pa-applet
 bindsym $mod+Ctrl+m exec pavucontrol
 
@@ -188,11 +188,11 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 assign [class="VirtualBox"] $ws8
 assign [class="foobar2000"] $ws2
 assign [class="Steam"] $ws5
-assign [class="Subl3"] $ws3
+#assign [class="Subl3"] $ws3
 assign [class="Thunderbird"] $ws4
 assign [class="Geary"] $ws4
 assign [class="Nylas Mail"] $ws4
-
+assign [class="Mailspring"] $ws4
 # Change Monitor Orientation
 bindsym $mod+Shift+h exec --no-startup-id ~/.screenlayout/horizontal.sh
 bindsym $mod+Shift+v exec --no-startup-id ~/.screenlayout/vertical.sh
@@ -202,6 +202,8 @@ for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="plank"] floating enable
 for_window [class="Calamares"] floating enable border normal
 for_window [class="VirtualBox"] floating disable
+for_window [class="UnityHub"] floating enable
+for_window [class="Gscreenshot"] floating enable
 #for_window [class="foobar2000"] floating disable
 for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
@@ -296,25 +298,32 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
-exec --no-startup-id ~/.screenlayout/default.sh # screen layout
+#exec --no-startup-id ~/.screenlayout/default.sh # screen layout
 exec --no-startup-id amor
+exec --no-startup-id nextcloud
 exec --no-startup-id dropbox
-exec --no-startup-id redshift
+exec --no-startup-id redshift-gtk
 exec --no-startup-id discord
 #exec /usr/share/playonlinux/playonlinux --run "Foobar2000"; bash
 #exec --no-startup-id thunderbird
-exec --no-startup-id geary
+#exec --no-startup-id geary
+exec --no-startup-id mailspring
 #exec --no-startup-id nylas
 # exec --no-startup-id blueman
 # exec_always --no-startup-id sbxkb
-#exec --no-startup-id start_conky_maia
+exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
+exec --no-startup-id /home/bnguyen/.screenlayout/default.sh
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id fix_xcursor
-exec nvidia-settings -a "[gpu:0]/GPUFanControlState=1"; bash
-exec nvidia-settings -a "[fan:0]/GPUCurrentFanSpeed=15"; bash
-exec nvidia-settings -c :0 -a '[gpu:0]/GPUGraphicsClockOffset[3]=230'; bash
+#exec nvidia-settings -a "[gpu:0]/GPUFanControlState=1"; bash
+#exec_always nvidia-settings -a "[fan:0]/GPUCurrentFanSpeed=15"; bash
+exec_always nvidia-settings -c :0 -a '[gpu:0]/GPUGraphicsClockOffset[3]=0'; bash
 exec_always /home/bnguyen/.config/polybar/launch.sh
+#exec slack
+exec googlemessages
+exec /usr/lib/anbox/anbox-bridge
+
 
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
@@ -352,7 +361,7 @@ client.background       #2B2C2B
 #############################
 
 # Set inner/outer gaps
-gaps inner 10
+gaps inner 25
 gaps outer -4
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
